@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--mysql 连接数据库jar 这里选择自己本地位置-->
+    <classPathEntry location="/Users/IFT8/Tools/mybatis-generator/core/mybatis-generator-core/mysql-connector-java-5.1.35-bin.jar" />
+    <context id="tables" targetRuntime="MyBatis3">
+        <!-- 去除表前缀 -->
+        <property name="suppressTablePrefix" value="t_"/>
+        <!-- 生成domain后缀 -->
+        <property name="generateDomainSuffix" value="Entity"/>
+        <!-- 是否生成BaseResultMap 默认不生成 -->
+        <property name="generateBaseResultMap" value="true"/>
+        <!-- 是否生成generateJdbcType 默认不生成 -->
+        <property name="generateJdbcType" value="false"/>
+        <!-- 强制TINY为Integer -->
+        <property name="forceTiny2Int" value="true"/>
+        <!-- 忽略数据库操作时间(由数据库自行维护) -->
+        <property name="suppressColumnOptime" value="true"/>
+        <!-- LombokPlugin -->
+        <plugin type="org.mybatis.generator.plugins.LombokPlugin"/>
+        <!-- tkMybatis插件  -->
+        <plugin type="org.mybatis.generator.plugins.TkMapperPlugin">
+            <property name="mappers" value="BaseKzMapper"/>
+        </plugin>
+
+        <!-- 数据库表注释生成-->
+        <commentGenerator >
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+            <property name="author" value="IFT8"/>
+            <!-- BlobColumn单独抽离 默认false -->
+            <property name="typeResolverBlobColumn" value="false"/>
+            <property name="dateFormat" value="yyyy/MM/dd"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/yijinjin" userId="huamu"
+                        password="Abcd1234">
+        </jdbcConnection>
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+           NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.kongzhong.finance.paydayloan.audit.model.entity"
+                            targetProject="/Users/IFT8/kz/finance/paydayloan/AuditService/audit-server/src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置
+           如果maven工程只是单独的一个工程，targetProject="src/main/java"
+           若果maven工程是分模块的工程，targetProject="所属模块的名称"，例如：
+           targetProject="ecps-manager-mapper"，下同-->
+        <!--  -->
+        <!-- <sqlMapGenerator targetPackage="mapper" -->
+        <!-- targetProject="/Users/IFT8/kz/finance/paydayloan/AuditService/audit-server/src/main/resources"> -->
+        <!-- enableSubPackages:是否让schema作为包的后缀 -->
+        <!-- <property name="enableSubPackages" value="false" /> -->
+        <!-- </sqlMapGenerator> -->
+        <!-- targetPackage：mapper接口生成的位置 XMLMAPPER -->
+        <javaClientGenerator type="ANNOTATEDMAPPER"
+                             targetPackage="com.kongzhong.finance.paydayloan.audit.mapper"
+                             targetProject="/Users/IFT8/kz/finance/paydayloan/AuditService/audit-server/src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <table schema="" tableName="user"/>
+        <table schema="" tableName="credit_log"/>
+        <table schema="" tableName="user_blacklist"/>
+        <table schema="" tableName="credit_apply"/>
+        <table schema="" tableName="credit_apply_event"/>
+        <table schema="" tableName="user_credit"/>
+        <table schema="" tableName="user_credit_event"/>
+        <table schema="" tableName="loan_contract_template"/>
+        <table schema="" tableName="user_media"/>
+        <table schema="" tableName="user_contact"/>
+        <table schema="" tableName="user_device"/>
+        <table schema="" tableName="user_detail"/>
+        <table schema="" tableName="user_detail_history"/>
+        <table schema="" tableName="user_address"/>
+        <table schema="" tableName="user_sms_history"/>
+        <table schema="" tableName="user_call_history"/>
+        <table schema="" tableName="credit_state_machine"/>
+        <table schema="" tableName="credit_apply_workflow"/>
+        <table schema="" tableName="credit_route_rule"/>
+        <table schema="" tableName="credit_partner_fee"/>
+    </context>
+</generatorConfiguration> 

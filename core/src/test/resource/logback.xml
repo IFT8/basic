@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="LOG_PATH" value="/data/logs/paydayloan/AppGateway/access.log"/>
+
+    <include resource="k-base.xml"/>
+    <root level="INFO"/>
+</configuration>

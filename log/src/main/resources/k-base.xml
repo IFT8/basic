@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--<property name="LOG_PATH" value="access.log"/>-->
+    <!--<property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %le %lo [%thread] %meta #ELK# %msg %ex"/>-->
+
+    <include resource="k-file-appender.xml"/>
+    <include resource="k-console-appender.xml"/>
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</included>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="LOG_PATH" value="/data/logs/xdpay/xdtrade/xdtrade.log"/>
+
+    <include resource="k-base.xml"/>
+    <root level="INFO"/>
+    <!--<logger name="org.apache.http.wire" level="DEBUG"/>-->
+    <logger name="me.ift8.basic.webdriver" level="DEBUG"/>
+</configuration>

@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kongzhong.finance.basic</groupId>
+    <groupId>me.ift8.basic</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1.RELEASE</version>
 
     <modules>
         <module>log</module>
-        <module>trace</module>
+        <module>core</module>
+        <module>http-client</module>
+        <module>common-biz</module>
+        <module>constant</module>
+        <module>redis</module>
+        <module>db</module>
+        <module>ftp-client</module>
+        <module>setting-biz</module>
+        <module>metrics</module>
+        <module>job</module>
+        <module>webdriver</module>
+        <module>dependencies</module>
     </modules>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lombok.version>1.16.10</lombok.version>
+        <java.version>1.8</java.version>
+        <lombok.version>1.16.18</lombok.version>
         <guava.version>19.0</guava.version>
-        <commons.lang3.version>3.4</commons.lang3.version>
     </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Popocloud Release Repository</name>
-            <url>http://10.230.200.15:8081/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Popocloud Snapshot Repository</name>
-            <url>http://10.230.200.15:8081/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <dependencies>
         <!-- lombok -->
@@ -43,20 +40,20 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- lang3 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
-        </dependency>
-
-        <!-- Guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
