@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <property name="LOG_PATH" value="access.log"/>
+
+    <include resource="k-suit.xml"/>
+
+</configuration>
