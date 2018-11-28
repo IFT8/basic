@@ -7,7 +7,7 @@
     <groupId>me.ift8.basic</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1.RELEASE</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <modules>
         <module>log</module>
@@ -41,6 +41,38 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>oss</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/IFT8/basic</url>
+        <connection>https://github.com/IFT8/basic.git</connection>
+        <developerConnection>https://github.com/IFT8/basic</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>IFT8</name>
+            <email>IFT8@QQ.COM</email>
+            <url>https://github.com/IFT8/basic</url>
+        </developer>
+    </developers>
 
     <build>
         <plugins>
