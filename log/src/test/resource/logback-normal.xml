@@ -4,7 +4,7 @@
     <property name="LOG_PATH" value="access.log"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="com.kongzhong.finance.basic.log.config.pattern.KPatternLayoutEncoder"/>
+        <encoder class="me.ift8.basic.log.config.pattern.KPatternLayoutEncoder"/>
     </appender>
 
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -16,7 +16,7 @@
             <!--最多保留30天log-->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <encoder class="com.kongzhong.finance.basic.log.config.pattern.KPatternLayoutEncoder">
+        <encoder class="me.ift8.basic.log.config.pattern.KPatternLayoutEncoder">
             <pattern/>
         </encoder>
     </appender>
@@ -32,7 +32,7 @@
     </appender>
 
     <!-- Trace -->
-    <appender name ="KTRACE" class= "com.kongzhong.finance.basic.log.appender.ExceptionTraceAppender"/>
+    <appender name ="KTRACE" class= "me.ift8.basic.log.appender.ExceptionTraceAppender"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

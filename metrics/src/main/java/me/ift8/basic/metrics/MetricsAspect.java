@@ -119,7 +119,7 @@ public class MetricsAspect {
     }
 
     //api实现会强制加Metric，其他只要打Metric标签才会打 (ajc Bug 对于注解 需要外加限制' execution(* *(..)) ')
-    @Around("execution(* *(..)) && @annotation(me.ift8.basic.metrics.Metrics) || execution(public * com.kongzhong.finance..*.controller..*.*(..)) || execution(public * com.kongzhong.finance..*.api..*.*(..))")
+    @Around("execution(* *(..)) && @annotation(me.ift8.basic.metrics.Metrics) || execution(public * me.ift8..*.controller..*.*(..)) || execution(public * me.ift8..*.api..*.*(..))")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long start = System.currentTimeMillis();
         MethodSignature ms = (MethodSignature) point.getSignature();
