@@ -5,16 +5,17 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>me.ift8.basic</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.9.9.7-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>metrics</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.9.9.7-SNAPSHOT</version>
 
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
         <servlet.version>3.1.0</servlet.version>
+        <influxdb.version>2.14</influxdb.version>
     </properties>
 
     <dependencies>
@@ -25,9 +26,15 @@
         </dependency>
 
         <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>trace-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.influxdb</groupId>
             <artifactId>influxdb-java</artifactId>
-            <version>2.5</version>
+            <version>${influxdb.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -52,20 +59,25 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.8.RELEASE</version>
             <scope>provided</scope>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.3.21.RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.5.3.RELEASE</version>
             <scope>test</scope>
         </dependency>
 

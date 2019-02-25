@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--<property name="appName" value="great-service"/>-->
+
+    <!--<include resource="base-config.xml"/>-->
+
+    <include resource="elk-file-appender.xml"/>
+    <include resource="k-console-appender.xml"/>
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</included>
+
+

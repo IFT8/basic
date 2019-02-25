@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <property name="LOG_DIR_PATH" value="/data/app_log"/>
+
+    <!--<property name="appName" value="great-service"/>-->
+    <property name="LOG_PATH" value="${LOG_DIR_PATH}/${appName}/access.log"/>
+    <property name="MAX_DAY" value="15"/>
+    <property name="MAX_FILE_SIZE" value="1024MB"/>
+</included>
+
+

@@ -1,14 +1,15 @@
 package me.ift8.basic.utils;
 
+import me.ift8.basic.exception.SystemException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import me.ift8.basic.exception.SystemException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.cglib.beans.BeanMap;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
@@ -71,25 +72,38 @@ public class BeanMapper {
         return map;
     }
 
+    public static <T> T map2Bean(Map map, Class<T> clazz) {
+        T target;
+        try {
+            target = clazz.newInstance();
+        } catch (Exception e) {
+            log.error("BeanCopy[系统异常]", e);
+            throw new SystemException("BEAN_COPY_SYSTEM_EXCEPTION", "BeanCopy系统异常", e);
+        }
 
-    public static <B, D> List<D> mapList(List<B> source, Class<D> cla) {
+        BeanMap beanMap = BeanMap.create(target);
+        beanMap.putAll(map);
+        return target;
+    }
+
+    public static <B, D> List<D> mapList(List<B> source, Class<D> clazz) {
         if (source == null) {
             return Lists.newArrayList();
         }
         List<D> listD = new ArrayList<>();
         for (B b : source) {
-            D d = map(b, cla);
+            D d = map(b, clazz);
             listD.add(d);
         }
         return listD;
     }
 
-    public static <S, D> D map(S source, Class<D> cla) {
+    public static <S, D> D map(S source, Class<D> clazz) {
         if (source == null) {
             return null;
         }
         try {
-            D target = cla.newInstance();
+            D target = clazz.newInstance();
             BeanUtils.copyProperties(source, target);
             return target;
         } catch (Exception e) {

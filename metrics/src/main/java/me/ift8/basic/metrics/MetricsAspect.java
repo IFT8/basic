@@ -1,6 +1,7 @@
 package me.ift8.basic.metrics;
 
 import me.ift8.basic.exception.ServiceException;
+import me.ift8.basic.trace.core.Trace;
 import me.ift8.basic.utils.DefaultValue;
 import me.ift8.basic.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,10 @@ import java.lang.reflect.Method;
 @Slf4j
 @Aspect
 public class MetricsAspect {
-    private MetricsUtils metricsUtils;
+    private MetricsUtils metricsUtils = null;
+
+    public MetricsAspect() {
+    }
 
     public MetricsAspect(MetricsUtils metricsUtils) {
         this.metricsUtils = metricsUtils;
@@ -91,23 +95,30 @@ public class MetricsAspect {
      * obj[]转jsonstr
      */
     private String toJson(Object[] o) {
-        if(o==null) return null;
-        if(o.length==0) return "[]";
-        StringBuilder sb = new StringBuilder("[");
-        for(int i = 0; i < o.length; i++) {
-            sb.append(toJson(o[i])).append(",");
+        if (o == null) {
+            return null;
         }
-        return sb.substring(0,sb.length()-1) + "]";
+        if (o.length == 0) {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder("[");
+        for (Object o1 : o) {
+            sb.append(toJson(o1)).append(",");
+        }
+        return sb.substring(0, sb.length() - 1) + "]";
     }
+
     /**
      * obj转jsonstr
      */
     private String toJson(Object o) {
-        if(o==null) return "null";
+        if (o == null) {
+            return "null";
+        }
         try {
             return JsonUtils.toJsonWithinException(o);
         } catch (Exception e) {
-            return "["+o.getClass().toString()+"]";
+            return "[" + o.getClass().toString() + "]";
         }
     }
 
@@ -115,12 +126,16 @@ public class MetricsAspect {
     @PostConstruct
     private void init() {
         hasMetricsClient = metricsUtils != null;
-        log.info("[aop] MetricsAspect加载完成 hasMetricsClient=[{}] controller && api 强制打出入参 (忽略请加Metrics注解)", hasMetricsClient);
+        log.info("[aop] MetricsAspect 加载完成: class=[{}] hasMetricsClient=[{}] controller && api 强制打出入参 (忽略请加Metrics注解)", this.getClass().getSimpleName(), this.hasMetricsClient);
     }
 
     //api实现会强制加Metric，其他只要打Metric标签才会打 (ajc Bug 对于注解 需要外加限制' execution(* *(..)) ')
     @Around("execution(* *(..)) && @annotation(me.ift8.basic.metrics.Metrics) || execution(public * me.ift8..*.controller..*.*(..)) || execution(public * me.ift8..*.api..*.*(..))")
     public Object around(ProceedingJoinPoint point) throws Throwable {
+        return doAaround(point);
+    }
+
+    protected Object doAaround(ProceedingJoinPoint point) throws Throwable {
         long start = System.currentTimeMillis();
         MethodSignature ms = (MethodSignature) point.getSignature();
         Metrics metrics;
@@ -200,6 +215,7 @@ public class MetricsAspect {
                 //系统异常
                 metricsUtils.systemFail(metricsName, start);
             }
+            Trace.logError(metricsName, e);
         }
     }
 

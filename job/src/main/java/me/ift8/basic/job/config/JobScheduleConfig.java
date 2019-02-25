@@ -170,7 +170,7 @@ public class JobScheduleConfig {
         }
         for (String jobSchedulerName : jobSchedulerNames) {
             JobScheduler jobScheduler = (JobScheduler) applicationContext.getBean(jobSchedulerName);
-            jobScheduler.shutdown();
+            jobScheduler.getSchedulerFacade().shutdownInstance();
         }
     }
 

@@ -14,4 +14,5 @@ public interface MDCConstants {
      */
     String PP_TRANSACTION_ID = "PtxId";
     String PP_SPAN_ID = "PspanId";
+    String REQUEST_ID = "requestId";
 }

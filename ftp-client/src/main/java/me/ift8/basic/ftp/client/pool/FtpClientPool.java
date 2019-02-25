@@ -15,11 +15,11 @@ public class FtpClientPool extends GenericObjectPool<FTPClient> {
     private FtpClientConfig clientConfig;
 
     public FtpClientPool(FtpClientConfig clientConfig) {
-        super(new FtpClientFactory(clientConfig), new me.ift8.basic.ftp.client.pool.FtpPoolConfig());
+        super(new FtpClientFactory(clientConfig), new FtpPoolConfig());
         this.clientConfig = clientConfig;
     }
 
-    public FtpClientPool(me.ift8.basic.ftp.client.pool.FtpPoolConfig ftpPoolConfig, FtpClientConfig clientConfig) {
+    public FtpClientPool(FtpPoolConfig ftpPoolConfig, FtpClientConfig clientConfig) {
         super(new FtpClientFactory(clientConfig), ftpPoolConfig);
         this.clientConfig = clientConfig;
     }

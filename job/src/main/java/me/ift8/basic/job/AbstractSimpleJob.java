@@ -1,14 +1,14 @@
 package me.ift8.basic.job;
 
-import com.dangdang.ddframe.job.api.ShardingContext;
-import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import lombok.extern.slf4j.Slf4j;
 import me.ift8.basic.exception.ServiceException;
 import me.ift8.basic.job.annotation.JobSchedule;
 import me.ift8.basic.metrics.MetricsUtils;
+import com.dangdang.ddframe.job.api.ShardingContext;
+import com.dangdang.ddframe.job.api.simple.SimpleJob;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 /**
  * Created by chenfeng on 2016/12/16.
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public abstract class AbstractSimpleJob implements SimpleJob {
     private boolean useMetricsUtils = false;
 
-    @Resource
+    @Autowired(required = false)
     private MetricsUtils metricsUtils;
 
     @PostConstruct

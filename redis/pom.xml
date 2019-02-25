@@ -5,14 +5,14 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>me.ift8.basic</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.9.9.7-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>redis</artifactId>
 
     <properties>
-        <spring.redis.version>1.7.1.RELEASE</spring.redis.version>
+        <spring.redis.version>2.0.3.RELEASE</spring.redis.version>
         <netty.version>4.1.16.Final</netty.version>
     </properties>
 
@@ -76,7 +76,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>RELEASE</version>
             <scope>provided</scope>
         </dependency>
 

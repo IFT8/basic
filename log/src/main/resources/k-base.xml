@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <!--<property name="LOG_PATH" value="access.log"/>-->
+    <!--<property name="appName" value="great-service"/>-->
+
     <!--<property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %le %lo [%thread] %meta #ELK# %msg %ex"/>-->
+
+    <!--<include resource="base-config.xml"/>-->
 
     <include resource="k-file-appender.xml"/>
     <include resource="k-console-appender.xml"/>

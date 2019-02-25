@@ -2,6 +2,8 @@ package me.ift8.basic.redis.lock;
 
 import me.ift8.basic.exception.ServiceException;
 import me.ift8.basic.exception.SystemException;
+import me.ift8.basic.fun.DoSomethingFun;
+import me.ift8.basic.fun.DoSomethingRetFun;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -46,12 +48,12 @@ public class RedisReturnLock extends AbstractRedisLock {
      * redis锁内执行
      */
     @Override
-    public void doInLock(RedisLockFun fun) throws ServiceException {
+    public void doInLock(DoSomethingFun fun) throws ServiceException {
         RLock lock = redissonClient.getLock(this.lockKeyPath);
         tryLock(lock);
 
         try {
-            fun.execute();
+            fun.doSomething();
         } finally {
             unLock(lock);
         }
@@ -61,12 +63,12 @@ public class RedisReturnLock extends AbstractRedisLock {
      * redis锁内执行
      */
     @Override
-    public <T> T doInLock(RedisLockRetFun<T> fun) throws ServiceException {
+    public <T> T doInLock(DoSomethingRetFun<T> fun) throws ServiceException {
         RLock lock = redissonClient.getLock(this.lockKeyPath);
         tryLock(lock);
 
         try {
-            return fun.executeAndRet();
+            return fun.doSomethingAndRet();
         } finally {
             unLock(lock);
         }

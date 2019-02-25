@@ -5,7 +5,7 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>me.ift8.basic</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.9.9.7-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,10 +14,15 @@
     <properties>
         <logback.version>1.1.7</logback.version>
         <slf4j.version>1.7.20</slf4j.version>
-        <commons.email.version>1.4</commons.email.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>trace-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!-- 日志 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -29,6 +34,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+
+        <!-- 日志格式 -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>4.9</version>
+        </dependency>
+
         <!-- 桥接log4j-->
         <dependency>
             <groupId>org.slf4j</groupId>

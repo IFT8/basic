@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--<property name="appName" value="great-service"/>-->
+
+    <!--<property name="PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>-->
+
+    <include resource="elk-file-appender.xml"/>
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+    </root>
+</included>
+
+

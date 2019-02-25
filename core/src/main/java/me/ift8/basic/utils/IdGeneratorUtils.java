@@ -77,7 +77,6 @@ public final class IdGeneratorUtils {
         return String.format("%s%d", time, id);
     }
 
-
     /**
      * 等待下一个毫秒的到来, 保证返回的毫秒数在参数lastTimestamp之后
      */

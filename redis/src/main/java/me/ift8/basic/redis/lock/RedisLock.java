@@ -3,6 +3,8 @@ package me.ift8.basic.redis.lock;
 
 import me.ift8.basic.exception.ServiceException;
 import me.ift8.basic.exception.SystemException;
+import me.ift8.basic.fun.DoSomethingFun;
+import me.ift8.basic.fun.DoSomethingRetFun;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -10,14 +12,14 @@ import java.util.UUID;
 
 @Slf4j
 public class RedisLock extends AbstractRedisLock {
-    private static final Lock NO_LOCK = new Lock(new UUID(0l, 0l), 0l);
+    private static final Lock NO_LOCK = new Lock(new UUID(0L, 0L), 0L);
 
     private static final int ONE_SECOND = 1000;
     private static final String LOCK_KEY_PATH_PREFIX = "redisLock:";
 
-    public static final int DEFAULT_EXPIRY_TIME_MILLIS = 60 * ONE_SECOND;
-    public static final int DEFAULT_ACQUIRE_TIMEOUT_MILLIS = 10 * ONE_SECOND;
-    public static final int DEFAULT_ACQUIRY_RESOLUTION_MILLIS = 100;
+    private static final int DEFAULT_EXPIRY_TIME_MILLIS = 60 * ONE_SECOND;
+    private static final int DEFAULT_ACQUIRE_TIMEOUT_MILLIS = 10 * ONE_SECOND;
+    private static final int DEFAULT_ACQUIRY_RESOLUTION_MILLIS = 100;
 
     private final StringRedisTemplate redisClient;
 
@@ -252,22 +254,22 @@ public class RedisLock extends AbstractRedisLock {
      * redis锁内执行
      */
     @Override
-    public synchronized void doInLock(RedisLockFun fun) throws ServiceException {
+    public synchronized void doInLock(DoSomethingFun fun) throws ServiceException {
         acquireAndCheck();
 
         try {
-            fun.execute();
+            fun.doSomething();
         } finally {
             this.release();
         }
     }
 
     @Override
-    public synchronized <T> T doInLock(RedisLockRetFun<T> fun) throws ServiceException {
+    public synchronized <T> T doInLock(DoSomethingRetFun<T> fun) throws ServiceException {
         acquireAndCheck();
 
         try {
-           return fun.executeAndRet();
+           return fun.doSomethingAndRet();
         } finally {
             this.release();
         }

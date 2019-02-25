@@ -14,9 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Result<E> {
     /**
-     * ∙成功恒为 SUCCESS
-     * ∙系统异常恒为 SYSTEM_FAIL
-     * ∙业务异常为 FAIL 或者对应业务异常码
+     * !!! zuul转发规则 对应 本结构体和code
+     *
+     * ∙成功恒为 RES_CODE_SUCCESS -> 0
+     * ∙系统异常恒为 ERROR_DEFAULT -> 10000
+     * ∙业务异常为 RES_CODE_FAIL-> 1 或者对应业务异常码
      */
     private String code;
     /**
@@ -35,7 +37,7 @@ public class Result<E> {
     }
 
     public static <E> Result<E> success(E data) {
-        return new Result<>(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getDesc(), data);
+        return new Result<>(ResponseCodeEnum.RES_CODE_SUCCESS.getCode(), ResponseCodeEnum.RES_CODE_SUCCESS.getDesc(), data);
     }
 
     public static <E> Result<E> fail(ServiceException e) {
@@ -43,14 +45,18 @@ public class Result<E> {
     }
 
     public static <E> Result<E> fail(String msg) {
-        return new Result<>(ResponseCodeEnum.FAIL.getCode(), msg, null);
+        return new Result<>(ResponseCodeEnum.RES_CODE_FAIL.getCode(), msg, null);
     }
 
     public static <E> Result<E> systemFail() {
-        return new Result<>(ResponseCodeEnum.SYSTEM_FAIL.getCode(), ResponseCodeEnum.SYSTEM_FAIL.getDesc(), null);
+        return new Result<>(ResponseCodeEnum.ERROR_DEFAULT.getCode(), ResponseCodeEnum.ERROR_DEFAULT.getDesc(), null);
     }
 
     public static <E> Result<E> systemFail(Throwable e) {
-        return new Result<>(ResponseCodeEnum.SYSTEM_FAIL.getCode(), e.toString(), null);
+        return new Result<>(ResponseCodeEnum.ERROR_DEFAULT.getCode(), e.toString(), null);
+    }
+
+    public boolean isSuccess(){
+        return ResponseCodeEnum.RES_CODE_SUCCESS.getCode().equals(this.code);
     }
 }

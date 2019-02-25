@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
 
+    <!-- 基本配置 -->
+    <include resource="base-config.xml"/>
+
+    <!-- 覆盖基本配置 -->
     <property name="LOG_PATH" value="access.log"/>
+
     <!--<property name="PATTERN" value=""/>-->
 
-    <include resource="k-base.xml"/>
+    <include resource="elk-base.xml"/>
+    <!--<include resource="elk-file-only.xml"/>-->
 
     <root level="INFO"/>
 </configuration>

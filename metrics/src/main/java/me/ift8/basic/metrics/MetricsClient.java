@@ -1,5 +1,6 @@
 package me.ift8.basic.metrics;
 
+import me.ift8.basic.trace.core.Trace;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.influxdb.InfluxDB;
@@ -28,8 +29,11 @@ public class MetricsClient {
 
     @PostConstruct
     private void init() {
-        influxDB = InfluxDBFactory.connect(url, username, password);
-        influxDB.enableBatch(1000, 100, TimeUnit.MILLISECONDS);
+        influxDB = InfluxDBFactory.connect(url, username, password)
+                .enableGzip()
+                .enableBatch(1000, 100, TimeUnit.MILLISECONDS);
+
+        needInit();
     }
 
     @PreDestroy
@@ -37,7 +41,7 @@ public class MetricsClient {
         influxDB.close();
     }
 
-    public boolean needInit() {
+    private boolean needInit() {
         long c = influxDB.describeDatabases().stream().filter(db -> db.equals(database)).count();
         if (c == 0) {
             influxDB.createDatabase(database);
@@ -60,7 +64,11 @@ public class MetricsClient {
                     .build();
             influxDB.write(database, "autogen", point);
         } catch (Exception ex) {
-            log.error("打点到InfluxDb出现异常", ex);
+            log.error("打点到InfluxDb出现异常 measurement:【{}】count:【】time:【{}】tags:【{}】", measurement, count, time, tags, ex);
         }
+
+        Trace.logMetricForCount(measurement, (int) count);
+        Trace.logMetricForDuration(measurement, time);
     }
 }
+

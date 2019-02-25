@@ -1,6 +1,5 @@
 package me.ift8.basic.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -13,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 
 /**
@@ -33,12 +33,6 @@ public class JsonUtils {
             .registerModule(new JavaTimeModule())
             .registerModule(new Jdk8Module());
 
-    /**
-     * obj转json不捕获异常
-     */
-    public static String toJsonWithinException(Object o) throws JsonProcessingException {
-        return OBJECT_MAPPER.writeValueAsString(o);
-    }
     /**
      * obj转json
      */
@@ -85,6 +79,34 @@ public class JsonUtils {
             log.error("Json反序列化失败[系统异常] json={}", json, e);
         }
         return null;
+    }
+
+    /**
+     * json转obj不捕获异常
+     */
+    public static <T> T fromJsonWithinThrowable(String json, TypeReference<T> typeOfT) throws IOException {
+        return OBJECT_MAPPER.readValue(json, typeOfT);
+    }
+
+    /**
+     * json转obj不捕获异常
+     */
+    public static <T> T fromJsonWithinThrowable(String json, Class<T> classOfT)  throws IOException{
+        return OBJECT_MAPPER.readValue(json, classOfT);
+    }
+
+    /**
+     * json转obj不捕获异常
+     */
+    public static <T> T fromJsonWithinThrowable(String json, Type type) throws IOException {
+        return OBJECT_MAPPER.readValue(json, genJavaType(type));
+    }
+
+    /**
+     * obj转json不捕获异常
+     */
+    public static String toJsonWithinException(Object o) throws IOException {
+        return OBJECT_MAPPER.writeValueAsString(o);
     }
 
     public static JavaType genJavaType(Type type) {

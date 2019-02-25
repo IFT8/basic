@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>trace</artifactId>
+        <groupId>me.ift8.basic</groupId>
+        <version>0.0.9.9.7-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>trace-aop-utils</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.ift8.basic</groupId>
+            <artifactId>trace-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.ift8.basic</groupId>
+            <artifactId>metrics</artifactId>
+        </dependency>
+
+        <!-- AspectJ -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

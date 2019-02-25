@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}</file>
+        <!-- 设置滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--设置日志命名模式-->
+            <fileNamePattern>${LOG_PATH}.%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
+            <!--最多保留多少天log-->
+            <maxHistory>${MAX_DAY:-30}</maxHistory>
+            <!-- 限制文件大小 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${MAX_FILE_SIZE:-1024MB}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8" class="me.ift8.basic.log.config.pattern.G7LogstashEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "time":"%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                        "level": "%level",
+                        "app_name": "${appName}",
+                        "thread": "%thread",
+                        "log_name": "%logger",
+                        "RequestId": "%requestId",
+                        "msg": "%message %exception{10}",
+                        "stack_trace": "%exception{10}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- 异步记录日志 -->
+    <appender name="ASYNC" class="me.ift8.basic.log.appender.KAsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="RollingFile"/>
+    </appender>
+
+</included>
