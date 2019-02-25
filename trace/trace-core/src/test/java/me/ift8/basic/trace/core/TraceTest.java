@@ -30,7 +30,6 @@ public class TraceTest {
         log.info("{}", currentMessageId);
     }
 
-
     @Test
     public void tarceLogCase() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
