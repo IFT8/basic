@@ -27,12 +27,6 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>trace-job</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
         <!-- import elastic-job lite core -->
         <dependency>
             <groupId>com.dangdang</groupId>

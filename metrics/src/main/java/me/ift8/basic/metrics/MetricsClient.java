@@ -1,6 +1,5 @@
 package me.ift8.basic.metrics;
 
-import me.ift8.basic.trace.core.Trace;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.influxdb.InfluxDB;
@@ -66,9 +65,6 @@ public class MetricsClient {
         } catch (Exception ex) {
             log.error("打点到InfluxDb出现异常 measurement:【{}】count:【】time:【{}】tags:【{}】", measurement, count, time, tags, ex);
         }
-
-        Trace.logMetricForCount(measurement, (int) count);
-        Trace.logMetricForDuration(measurement, time);
     }
 }
 

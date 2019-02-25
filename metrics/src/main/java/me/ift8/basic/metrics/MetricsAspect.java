@@ -1,10 +1,9 @@
 package me.ift8.basic.metrics;
 
+import lombok.extern.slf4j.Slf4j;
 import me.ift8.basic.exception.ServiceException;
-import me.ift8.basic.trace.core.Trace;
 import me.ift8.basic.utils.DefaultValue;
 import me.ift8.basic.utils.JsonUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -215,7 +214,6 @@ public class MetricsAspect {
                 //系统异常
                 metricsUtils.systemFail(metricsName, start);
             }
-            Trace.logError(metricsName, e);
         }
     }
 

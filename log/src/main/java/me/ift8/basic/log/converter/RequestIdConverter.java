@@ -8,7 +8,7 @@ public class RequestIdConverter extends DynamicConverter<ILoggingEvent> {
 
     @Override
     public String convert(ILoggingEvent event) {
-        String requestId = RequestIdUtils.getCatFullTraceId(event);
+        String requestId = RequestIdUtils.getPinpointFullTraceId(event);
         return "[" + format(requestId) + "]";
     }
 

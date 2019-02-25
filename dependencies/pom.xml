@@ -144,37 +144,6 @@
                 <version>${project.parent.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-core</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-job</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-mq</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-netty</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-web</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.ift8.basic</groupId>
-                <artifactId>trace-aop-utils</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 

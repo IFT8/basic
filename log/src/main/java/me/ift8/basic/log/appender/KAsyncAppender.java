@@ -13,8 +13,6 @@ public class KAsyncAppender extends AsyncAppender {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
-        String currentMessageId = RequestIdUtils.getCatFullTraceIdByLocal();
-        MDC.put(MDCConstants.MDC_REQUEST_ID, currentMessageId);
         super.append(eventObject);
     }
 }

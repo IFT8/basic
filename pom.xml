@@ -30,7 +30,6 @@
         <module>kafka-config</module>
         <module>kafka-listener</module>
         <module>kafka-sender</module>
-        <module>trace</module>
     </modules>
 
     <properties>
